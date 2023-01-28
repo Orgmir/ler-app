@@ -1,4 +1,4 @@
-package dev.luisramos.kmmstarter
+package app.luisramos.ler
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
