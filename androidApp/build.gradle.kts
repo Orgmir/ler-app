@@ -58,7 +58,10 @@ dependencies {
         implementation(UiTooling)
         implementation(UiToolingPreview)
         implementation(Foundation)
-        implementation(Material)
+        implementation(Material3)
+        implementation(Material3WindowSize)
         implementation(Activity)
+        implementation(SystemUiController)
+        implementation(Navigation)
     }
 }
