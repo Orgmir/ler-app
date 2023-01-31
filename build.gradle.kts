@@ -8,7 +8,7 @@ plugins {
     kotlin("android").version(Versions.Kotlin).apply(false)
     kotlin("multiplatform").version(Versions.Kotlin).apply(false)
     kotlin("plugin.serialization").version(Versions.Kotlin).apply(false)
-    id("com.squareup.sqldelight").version(Versions.SqlDelight).apply(false)
+    id("app.cash.sqldelight").version(Versions.SqlDelight).apply(false)
 }
 
 tasks.register("clean", Delete::class) {

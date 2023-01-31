@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("com.squareup.sqldelight")
+    id("app.cash.sqldelight")
 }
 
 kotlin {
@@ -24,6 +24,8 @@ kotlin {
                 implementation(Dependencies.Coroutines)
                 implementation(Dependencies.Datetime)
                 implementation(Dependencies.Settings)
+                implementation(Dependencies.Kermit.Core)
+                implementation(Dependencies.SqlDelight.Coroutines)
 
                 with(Dependencies.Ktor) {
                     implementation(Core)
@@ -34,11 +36,13 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(Dependencies.Test.Coroutines)
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation(Dependencies.Ktor.OkHttp)
+                implementation(Dependencies.SqlDelight.Android)
             }
         }
 //        val androidTest by getting
@@ -53,6 +57,7 @@ kotlin {
 
             dependencies {
                 implementation(Dependencies.Ktor.iOS)
+                implementation(Dependencies.SqlDelight.iOS)
             }
         }
         val iosX64Test by getting
@@ -65,6 +70,12 @@ kotlin {
             iosSimulatorArm64Test.dependsOn(this)
         }
     }
+
+    sourceSets.all {
+        languageSettings.optIn("kotlin.RequiresOptIn")
+        languageSettings.optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+        languageSettings.optIn("kotlinx.coroutines.FlowPreview")
+    }
 }
 
 android {
@@ -72,5 +83,13 @@ android {
     compileSdk = Versions.Android.CompileSdk
     defaultConfig {
         minSdk = Versions.Android.MinSdk
+    }
+}
+
+sqldelight {
+    databases {
+        create("LerDatabase") {
+            packageName.set("app.luisramos.ler.db")
+        }
     }
 }
